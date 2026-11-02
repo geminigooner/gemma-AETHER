@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-cream: #FFFDF7;
+    --bg-ivory: #FAF4E8;
+    --bg-lavender-soft: #F3EAFF;
+    --bg-lilac: #E5D4FF;
+    --plum-deep: #2D1948;
+    --plum-mid: #432468;
+    --violet-sat: #7B42BC;
+    --pink-bubble: #FF82C4;
+    --pink-soft: #FFD6EE;
+    --gold-celestial: #FFD166;
+    --peach-soft: #FFB59E;
+    --mint-ok: #A3F7BF;
+  }
+
+  body {
+    background-color: #FAF3E6;
+    color: #2D1948;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: 'Fredoka', 'Plus Jakarta Sans', sans-serif;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Kawaii Observatory Toy-Instrument Card Styling */
+.kawaii-panel {
+  background: linear-gradient(180deg, #FFFDF9 0%, #FAF2E6 100%);
+  border: 2.5px solid #2D1948;
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 0 #2D1948, inset 0 2px 0 rgba(255, 255, 255, 0.85);
+}
+
+.kawaii-panel-lavender {
+  background: linear-gradient(180deg, #F6EEFF 0%, #EADBFD 100%);
+  border: 2.5px solid #2D1948;
+  border-radius: 1.15rem;
+  box-shadow: 0 3px 0 #2D1948, inset 0 2px 0 rgba(255, 255, 255, 0.8);
+}
+
+.kawaii-subcard {
+  background: #FFFDF9;
+  border: 2px solid #2D1948;
+  border-radius: 0.9rem;
+  box-shadow: 0 2.5px 0 #2D1948;
+}
+
+.kawaii-btn-pink {
+  background: linear-gradient(180deg, #FF9AD2 0%, #FF70B8 100%);
+  color: #2D1948;
+  border: 2px solid #2D1948;
+  box-shadow: 0 2.5px 0 #2D1948, inset 0 1.5px 0 rgba(255, 255, 255, 0.65);
+  transition: transform 120ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 120ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.kawaii-btn-pink:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3.5px 0 #2D1948, inset 0 1.5px 0 rgba(255, 255, 255, 0.75);
+}
+
+.kawaii-btn-pink:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 #2D1948;
+}
+
+.kawaii-btn-cream {
+  background: linear-gradient(180deg, #FFFDF9 0%, #F4E9D8 100%);
+  color: #2D1948;
+  border: 2px solid #2D1948;
+  box-shadow: 0 2px 0 #2D1948;
+  transition: transform 120ms cubic-bezier(0.16, 1, 0.3, 1), background 120ms ease;
+}
+
+.kawaii-btn-cream:hover {
+  background: linear-gradient(180deg, #F6EEFF 0%, #E8D5FF 100%);
+}
+
+/* Custom subtle scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F4E9D8;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9D75CB;
+  border: 2px solid #2D1948;
+  border-radius: 9999px;
+}

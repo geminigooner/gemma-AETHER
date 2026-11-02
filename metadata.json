@@ -1,0 +1,6 @@
+{
+  "name": "GEMMA-AETHER: Atmospheric Evaluation & Tensor Forecasting Orbit",
+  "description": "Localized atmospheric intelligence, dual-embedding retrieval, and spatiotemporal precipitation forecasting research observatory centered on Watauga, Tennessee.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

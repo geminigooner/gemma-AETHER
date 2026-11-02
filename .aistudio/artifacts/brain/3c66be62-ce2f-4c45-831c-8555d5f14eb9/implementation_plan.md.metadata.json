@@ -1,0 +1,6 @@
+{
+  "summary": "Second-pass authoritative engineering specification for GEMMA-AETHER addressing all 12 technical review directives: evidence-based status tracking (downgrading unbuilt components to PLANNED with a 6-part verification gate), unified L=7 (1000-200 hPa) vertical tensor schema and explicit dual-tensor coupling, exact T=13 discrete temporal indexing, ERA5 0.25-deg vs 3 km effective resolution metadata, storm-event segmentation and atomic event-grouped splits, VerticalEncodedConvLSTM dimensional architecture, structured claim-tuple provenance verification for Gemma 4, diagnostic mascot state triggers, strict 7-workspace navigation, canonical record_id RRF contract, 5-class data source provenance semantics, and a 4-tier Scientific Claims Policy.",
+  "updatedAt": "2026-11-02T18:15:45.250439954Z",
+  "requestFeedback": true,
+  "userFacing": true
+}
