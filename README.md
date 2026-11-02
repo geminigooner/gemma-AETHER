@@ -16,15 +16,13 @@ Where atmospheric physics meets multimodal representation learning.
 
 An experimental scientific observatory investigating whether semantic retrieval, physical atmospheric analogues, and neural forecasting can work together to improve localized precipitation prediction.
 
-<br />
-
 ☁️　✦　🌧️　✦　🪻　✦　⚡
 
 </div>
 
 ⸻
 
-✦ Overview
+🪻 Overview
 
 GEMMA-AETHER is a localized atmospheric intelligence and machine-learning research platform centered on Watauga, Tennessee.
 
@@ -34,25 +32,21 @@ The project investigates the intersection of:
 * Independent semantic retrieval systems.
 * Numerical atmospheric analogue retrieval.
 * Spatiotemporal neural forecasting.
-* Meteorological data assimilation and analysis.
+* Meteorological data analysis.
 * Structured generative interpretation.
 * Reproducible scientific evaluation.
 
 Rather than treating weather forecasting as a single-model prediction problem, GEMMA-AETHER explores a layered architecture in which atmospheric observations, historical analogues, learned representations, and numerical forecasting models contribute to a unified research pipeline.
 
-The observatory is designed to make these systems inspectable, measurable, and experimentally comparable.
-
 Research objective: Determine whether combining independent multimodal semantic representations with physically grounded atmospheric analogue retrieval can provide measurable improvements to localized precipitation forecasting.
 
 ⸻
 
-🪻 Research Architecture
+🧠 Research Architecture
 
 GEMMA-AETHER uses three independent retrieval pathways coordinated with a numerical forecasting architecture.
 
 01 — Dual Multimodal Embedding Systems
-
-Two independently maintained embedding systems provide separate semantic retrieval pathways.
 
 Component	Model	Representation
 Index A	EmbeddingGemma 2	Local, 768-dimensional
@@ -65,9 +59,9 @@ EmbeddingGemma 2 and Gemini Embedding 2 produce vectors in independent represent
 
 Equal dimensionality does not imply vector-space equivalence.
 
-GEMMA-AETHER therefore prohibits direct cross-model cosine similarity.
+GEMMA-AETHER prohibits direct cross-model cosine similarity. Queries are embedded independently, searched against their respective indexes, and combined through Reciprocal Rank Fusion (RRF).
 
-Instead, independent retrieval rankings are combined through Reciprocal Rank Fusion (RRF), with later experiments investigating calibrated score fusion and learned alignment.
+Calibrated score fusion and learned alignment remain subsequent research experiments.
 
 02 — Numerical Atmospheric Analogue Retrieval
 
@@ -87,7 +81,7 @@ Can semantic similarity and physical atmospheric similarity provide complementar
 
 03 — Spatiotemporal Forecasting
 
-The forecasting architecture evaluates seven independent baselines:
+Seven independent forecasting baselines:
 
 #	Forecasting System
 01	Persistence
@@ -100,13 +94,11 @@ The forecasting architecture evaluates seven independent baselines:
 
 The retrieval-conditioned model investigates whether historical atmospheric representations can contribute useful information to neural forecasting through latent concatenation, cross-attention, and gated feature modulation.
 
-Retrieval improvements are treated as experimental hypotheses, not assumed outcomes.
+Retrieval improvements are experimental hypotheses, not assumed outcomes.
 
 ⸻
 
 🌎 Atmospheric Data Infrastructure
-
-The observatory is designed around multiple complementary meteorological datasets.
 
 Data Source	Scientific Responsibility
 ERA5	Historical atmospheric reanalysis
@@ -125,13 +117,11 @@ All atmospheric data is associated with explicit resolution metadata:
 
 ERA5, HRRR, and MRMS are aligned onto a common Watauga research grid.
 
-Importantly, interpolation does not create new atmospheric information. Regridded ERA5 fields retain their underlying coarse-resolution characteristics.
+Interpolation does not create new atmospheric information. Regridded ERA5 fields retain their underlying coarse-resolution characteristics.
 
 Open-Meteo point telemetry is maintained separately rather than artificially broadcast into spatial tensors.
 
 Provenance Classification
-
-Every atmospheric measurement or prediction is assigned an explicit provenance class.
 
 Classification	Meaning
 DIRECT_OBSERVATION	Physical station measurement
@@ -146,14 +136,22 @@ This classification is preserved throughout ingestion, processing, visualization
 
 🧮 Atmospheric Tensor Architecture
 
-GEMMA-AETHER uses a paired tensor representation to distinguish upper-air atmospheric profiles from surface, terrain, and radar information.
+GEMMA-AETHER uses paired tensor representations to distinguish upper-air atmospheric profiles from surface, terrain, and radar information.
 
 Upper-Air Tensor
 
-[
-X_{\text{upper}} \in
-\mathbb{R}^{T \times L \times H \times W \times C}
-]
+Dimension ordering:
+
+[T, L, H, W, C]
+
+Where:
+
+Symbol	Dimension	Description
+T	Time	Number of temporal observations
+L	Levels	Atmospheric pressure levels
+H	Height	Spatial grid height
+W	Width	Spatial grid width
+C	Channels	Atmospheric variables
 
 Canonical configuration:
 
@@ -179,10 +177,9 @@ Variables include:
 
 Surface, Terrain & Radar Tensor
 
-[
-X_{\text{surf}} \in
-\mathbb{R}^{T \times H \times W \times C}
-]
+Dimension ordering:
+
+[T, H, W, C]
 
 Ten channels represent:
 
@@ -200,14 +197,12 @@ Temporal Configuration
 
 Primary mesoscale nowcasting mode:
 
-* 13 discrete observations.
-* 15-minute sampling cadence.
-* 12 elapsed intervals.
-* 180-minute historical observation window.
-
-Forecast horizons:
-
-+15m · +30m · +60m · +120m · +180m
+Parameter	Configuration
+Observations	13
+Sampling interval	15 minutes
+Elapsed intervals	12
+Total observation window	180 minutes
+Forecast horizons	15, 30, 60, 120, 180 minutes
 
 Binary missing-data masks are maintained alongside atmospheric tensors.
 
@@ -230,25 +225,26 @@ Extracts vertical relationships, including:
 * Moisture gradients.
 * Vertical atmospheric structure.
 
-Produces a 64-dimensional spatial feature representation.
+Produces a 64-channel spatial feature representation.
 
 Stage 2 — Masked Surface Encoder
 
 Processes radar, surface meteorology, and terrain through a masked convolutional stem.
 
-Produces a 32-dimensional spatial representation.
+Produces a 32-channel spatial representation.
 
 Stage 3 — Feature Fusion
 
-Combines the vertical and surface representations into a 96-channel feature tensor.
+Combines vertical and surface representations into a 96-channel feature tensor.
 
 Stage 4 — ConvLSTM Core
 
 Three convolutional recurrent layers:
 
-* 96 → 128 channels.
-* 128 → 128 channels with residual connection.
-* 128 → 64 channels.
+Layer	Input Channels	Output Channels
+ConvLSTM 1	96	128
+ConvLSTM 2	128	128
+ConvLSTM 3	128	64
 
 Stage 5 — Retrieval Conditioning
 
@@ -273,23 +269,29 @@ All three indexes reference the same canonical training catalogue.
 Retrieval Experiments
 
 Experiment	Configuration
-A	EmbeddingGemma 2
-B	Gemini Embedding 2
+A	EmbeddingGemma 2 retrieval
+B	Gemini Embedding 2 retrieval
 N	Numerical Physical Analogue
 C1	Dual Semantic RRF
 C2	Tri-Modal Hybrid RRF
 
 Reciprocal Rank Fusion
 
-[
-RRF(d)=
-\sum_{m \in \mathcal{M}}
-\frac{w_m}{k+\operatorname{rank}_m(d)}
-]
+The RRF score for a document is calculated as:
+
+RRF(d) = Σ [ w_m / (k + rank_m(d)) ]
+
+Where:
+
+* d = candidate document.
+* m = retrieval system.
+* w_m = retrieval-system weight.
+* k = rank smoothing constant.
+* rank_m(d) = document rank in retrieval system m.
 
 Default configuration:
 
-* (k=60)
+* k = 60
 * Uniform pipeline weights.
 * Canonical record-ID matching.
 * Configurable missing-rank handling.
@@ -297,7 +299,7 @@ Default configuration:
 * Storm-event filtering.
 * Intra-event temporal deduplication.
 
-The purpose of these experiments is to measure whether combining retrieval systems improves analogue relevance and downstream forecasting performance.
+The objective is to measure whether combining retrieval systems improves analogue relevance and downstream forecasting performance.
 
 ⸻
 
@@ -333,8 +335,8 @@ Retrieval Evaluation
 
 * Recall@K.
 * Precision@K.
-* Mean Reciprocal Rank.
-* Normalized Discounted Cumulative Gain.
+* Mean Reciprocal Rank (MRR).
+* Normalized Discounted Cumulative Gain (NDCG).
 
 Dataset Leakage Prevention
 
@@ -342,9 +344,10 @@ Historical observations are grouped by meteorological storm event before partiti
 
 Target partitioning:
 
-* 70% Training.
-* 15% Validation.
-* 15% Testing.
+Partition	Target Share
+Training	70%
+Validation	15%
+Testing	15%
 
 Whole storm events remain atomic across partitions, with a 72-hour temporal embargo at split boundaries.
 
@@ -388,8 +391,6 @@ The deterministic verifier checks:
 
 Numerical values displayed in the interface are rendered from verified source values rather than trusted directly from generated prose.
 
-This preserves the distinction between numerical forecasts and their generated explanations.
-
 ⸻
 
 ☁️ The Observatory Interface
@@ -422,8 +423,6 @@ Its visual language combines:
 The mascot is integrated into the diagnostic system rather than functioning as purely decorative artwork.
 
 Its expressions correspond to actual atmospheric diagnostics, retrieval activity, and pipeline health.
-
-The visual experience is intended to make complex scientific instrumentation approachable without compromising the integrity of the underlying measurements.
 
 ⸻
 
@@ -513,8 +512,6 @@ Current verified state: Project scaffold and reference specification assets. Sci
 ⸻
 
 🔬 Research Questions
-
-GEMMA-AETHER is organized around several experimentally testable questions:
 
 01 — Representation Complementarity
 
